@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Copyright &copy;2020 by MillionStrengthKnowledge.com, All rights reserved.
+
+The publication of the ebook and source code are protected by copyright, 
+and permission must be obtained from the MillionStrengthKnowledge.com 
+prior to any prohibited reproduction, storage in a retrieval system, 
+or transmission in any form or by any means, electronic, mechanical, 
+photocopying, recording, or likewise.
+ -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.millionstrengthknowledge.interceptorprj</groupId>
+	<artifactId>ChapterVisitOnMethodEnterAdvice</artifactId>
+	<version>1.0</version>
+	<packaging>jar</packaging>
+	<name>InterceptorProjectChapterVisitOnMethodEnterAdvice</name>
+	<description>InterceptorProjectChapterVisitOnMethodEnterAdvice</description>
+
+	
+	<properties>
+		<java.version>11</java.version>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		<bytebuddy.version>1.10.16</bytebuddy.version>
+	</properties>
+	
+	<dependencies>		
+		<dependency>
+		    <groupId>net.bytebuddy</groupId>
+		    <artifactId>byte-buddy</artifactId>
+		    <version>${bytebuddy.version}</version>
+		</dependency>
+        
+		<!-- https://mvnrepository.com/artifact/net.bytebuddy/byte-buddy-agent -->
+		<dependency>
+		    <groupId>net.bytebuddy</groupId>
+		    <artifactId>byte-buddy-agent</artifactId>
+		    <version>${bytebuddy.version}</version>
+		</dependency>
+		
+	    <dependency>
+	        <groupId>org.junit.jupiter</groupId>
+	        <artifactId>junit-jupiter-api</artifactId>
+	        <version>5.7.0</version>
+	        <scope>test</scope>
+	    </dependency>
+	    
+	    <dependency>
+	        <groupId>org.junit.jupiter</groupId>
+	        <artifactId>junit-jupiter-engine</artifactId>
+	        <version>5.7.0</version>
+	        <scope>test</scope>
+	    </dependency>
+	    
+	    <dependency>
+			  <groupId>org.junit.platform</groupId>
+			  <artifactId>junit-platform-engine</artifactId>
+			  <version>1.7.0</version>    
+	    </dependency>
+	    
+	    <dependency>
+			  <groupId>org.junit.platform</groupId>
+			  <artifactId>junit-platform-commons</artifactId>
+			  <version>1.7.0</version>    
+	    </dependency>
+	    
+	    <dependency>
+			  <groupId>org.junit.platform</groupId>
+			  <artifactId>junit-platform-launcher</artifactId>
+			  <version>1.7.0</version>    
+	    </dependency>
+	    
+	    <dependency>
+			  <groupId>org.junit.platform</groupId>
+			  <artifactId>junit-platform-runner</artifactId>
+			  <version>1.7.0</version>    
+	    </dependency> 		
+	</dependencies> 
+
+	<build>
+		<plugins>
+	      <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-surefire-plugin</artifactId>
+	        <version>2.22.1</version>
+	      </plugin>
+	      
+	      <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-jar-plugin</artifactId>
+	        <version>3.2.0</version>
+	      </plugin>
+	      
+	      <plugin>
+	        <groupId>net.bytebuddy</groupId>
+	        <artifactId>byte-buddy-maven-plugin</artifactId>
+	        <version>${bytebuddy.version}</version>
+	        <executions>
+	          <execution>
+	            <goals>
+	              <goal>transform</goal>
+	            </goals>
+	          </execution>
+	        </executions>
+	        <configuration>
+	          <transformations>
+	            <transformation>
+	              <plugin>com.millionstrengthknowledge.interceptorprj.plugin.InterceptorPlugin</plugin>
+	            </transformation>
+	          </transformations>
+	        </configuration>
+	      </plugin>	      
+		</plugins>
+	</build>
+</project>
